@@ -83,7 +83,3 @@ Actualiza el inventario después del intercambio y muestra los cambios.
 3. Función del archivo:
    
 Ejecutar el programa simulando una operación básica de gestión de inventario, integrando el uso de clases, arreglos, punteros, y funciones. También sirve como demostración práctica de los conceptos aprendidos.
-
-✅ Conclusión
-Este sistema modular muestra cómo organizar un programa C++ realista usando los conceptos fundamentales del lenguaje. La separación en .h, .cpp, y main.cpp permite mantener el código ordenado, reutilizable y más fácil de mantener. Además, se aprovechan punteros, arrays y referencias, los cuales son esenciales en programación de sistemas como los utilizados en hospitales, donde la eficiencia y claridad son cruciales.
-

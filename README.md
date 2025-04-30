@@ -1,12 +1,15 @@
 # Practica_medicamentos
 
 🗂️ Explicación del Funcionamiento de Cada Archivo del Proyecto de Gestión de Medicamentos
+
 Este proyecto en C++ simula un sistema básico de gestión de medicamentos para un hospital. Está organizado en tres archivos principales: un archivo de cabecera (medicamento.h), un archivo de implementación (medicamento.cpp), y el archivo principal de ejecución (main.cpp). A continuación, se describe el propósito y funcionamiento de cada uno:
 
 ✅ 1. medicamento.h — Archivo de Cabecera
+
 Este archivo contiene la definición de la clase Medicamento y de algunas funciones auxiliares. Sirve como contrato o plano de lo que se puede hacer con los objetos de tipo medicamento.
 
 Contenidos y propósito:
+
 Definición de constantes, como MAX_MEDICAMENTOS, que establece el número máximo de medicamentos que se pueden manejar.
 
 Declaración de la clase Medicamento, que incluye:

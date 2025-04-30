@@ -4,65 +4,73 @@
 using namespace std;
 
 int main() {
-    // Creamos un arreglo de objetos tipo Medicamento
-    Medicamento inventario[MAX_MEDICAMENTOS];
+    Medicamento inventario[10];
 
-    // Número total de medicamentos registrados
-    int total = 3;
+    // Crear 10 medicamentos
+    inventario[0].SetDatos(1, "Paracetamol", 100);
+    inventario[1].SetDatos(2, "Ibuprofeno", 200);
+    inventario[2].SetDatos(3, "Amoxicilina", 150);
+    inventario[3].SetDatos(4, "Loratadina", 120);
+    inventario[4].SetDatos(5, "Omeprazol", 180);
+    inventario[5].SetDatos(6, "Salbutamol", 90);
+    inventario[6].SetDatos(7, "Metformina", 300);
+    inventario[7].SetDatos(8, "Losartán", 250);
+    inventario[8].SetDatos(9, "Cetirizina", 175);
+    inventario[9].SetDatos(10, "Diclofenaco", 130);
 
-    // Inicializamos 3 medicamentos con datos ficticios
-    inventario[0].SetDatos(101, "Paracetamol", 100);
-    inventario[0].SetPrecio(0, 1.25);
-    inventario[0].SetPrecio(1, 1.30);
+    // Asignar precios a los medicamentos
+    for (int i = 0; i < 10; i++) {
+        inventario[i].SetPrecio(0, 1.0f + i);       // Precio base
+        inventario[i].SetPrecio(1, 1.5f + i * 0.5); // Precio alternativo
+    }
 
-    inventario[1].SetDatos(102, "Amoxicilina", 50);
-    inventario[1].SetPrecio(0, 3.50);
-    inventario[1].SetPrecio(1, 3.60);
-
-    inventario[2].SetDatos(103, "Ibuprofeno", 200);
-    inventario[2].SetPrecio(0, 2.25);
-    inventario[2].SetPrecio(1, 2.40);
-
-    cout << "\n--- Inventario Inicial ---\n";
-    for (int i = 0; i < total; i++) {
+    cout << "\n--- INVENTARIO INICIAL ---\n";
+    for (int i = 0; i < 10; i++) {
         inventario[i].Mostrar();
     }
 
-    // Uso de arreglo simple para almacenar cantidades
-    int cantidades[3] = {100, 50, 200};
+    // Actualizar usando referencia
+    int nuevaCantidad = 999;
+    cout << "\n>>> Actualizando cantidad del medicamento 3 por referencia (ID: 4)\n";
+    inventario[3].ActualizarCantidadPorReferencia(nuevaCantidad);
+    inventario[3].Mostrar();
 
-    // Declaramos un puntero a entero y lo apuntamos al arreglo
-    int *pCantidades = cantidades;
+    // Actualizar usando puntero
+    int nuevaCantidad2 = 555;
+    cout << "\n>>> Actualizando cantidad del medicamento 5 por puntero (ID: 6)\n";
+    inventario[5].ActualizarCantidadPorPuntero(&nuevaCantidad2);
+    inventario[5].Mostrar();
 
-    // Accedemos a los elementos usando aritmética de punteros
-    cout << "\nMostrando cantidades con puntero: ";
-    for (int i = 0; i < total; i++) {
-        cout << *(pCantidades + i) << " ";
+    // Comparar medicamentos
+    cout << "\n>>> Comparando medicamentos\n";
+    if (inventario[0].CompararPorReferencia(inventario[1])) {
+        cout << "Medicamento 1 y 2 son iguales (por referencia)\n";
+    } else {
+        cout << "Medicamento 1 y 2 son diferentes (por referencia)\n";
     }
-    cout << endl;
 
-    // Mostramos el valor y la dirección de memoria con punteros
-    cout << "\nDirección del primer elemento del arreglo: " << pCantidades << endl;
-    cout << "Valor del primer elemento usando puntero: " << *pCantidades << endl;
+    if (inventario[1].CompararPorPuntero(&inventario[1])) {
+        cout << "Medicamento 2 comparado consigo mismo (por puntero): iguales\n";
+    }
 
-    // Intercambio usando punteros
-    cout << "\nIntercambiando cantidades del medicamento 1 y 2 usando punteros\n";
-    intercambiar(&cantidades[0], &cantidades[1]);
+    // Intercambio de cantidades usando punteros
+    cout << "\n>>> Intercambio de cantidades entre medicamento 7 y 8 (por puntero)\n";
+    int c1 = 2000, c2 = 5000;
+    cout << "Antes -> c1: " << c1 << ", c2: " << c2 << endl;
+    intercambiar(&c1, &c2);
+    cout << "Después de intercambio (puntero) -> c1: " << c1 << ", c2: " << c2 << endl;
 
-    // Actualizamos el inventario con las nuevas cantidades
-    inventario[0].ActualizarCantidad(cantidades[0]);
-    inventario[1].ActualizarCantidad(cantidades[1]);
+    // Intercambio de cantidades usando referencias
+    intercambiarReferencia(c1, c2);
+    cout << "Después de intercambio (referencia) -> c1: " << c1 << ", c2: " << c2 << endl;
 
-    // Verificamos cambios
-    inventario[0].Mostrar();
-    inventario[1].Mostrar();
-
-    // Intercambio usando referencias (más limpio en C++)
-    cout << "\nIntercambio por referencia:\n";
-    int x = 10, y = 20;
-    cout << "Antes: x = " << x << ", y = " << y << endl;
-    intercambiarReferencia(x, y);
-    cout << "Después: x = " << x << ", y = " << y << endl;
+    // Buscar precio específico con punteros
+    cout << "\n>>> Buscando precio 6.0 en el inventario\n";
+    for (int i = 0; i < 10; i++) {
+        if (inventario[i].CompararPrecio(6.0f)) {
+            cout << "Medicamento con ID " << i + 1 << " tiene un precio 6.0\n";
+        }
+    }
 
     return 0;
 }
